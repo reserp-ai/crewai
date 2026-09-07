@@ -20595,7 +20595,7 @@
       }
     },
     {
-      "description": "Send a complete Google Search URL to Reserp and return the public JSON response unchanged. The caller controls retries and all orchestration.",
+      "description": "Send a complete Google Search URL to Reserp's v2 Search endpoint and return the public JSON response unchanged. The caller controls retries and all orchestration.",
       "env_vars": [
         {
           "default": null,
@@ -20653,7 +20653,7 @@
             "type": "string"
           }
         },
-        "description": "Expose one public Reserp request as a CrewAI tool call.",
+        "description": "Expose one Reserp v2 Search request as a CrewAI tool call.",
         "properties": {},
         "required": [],
         "title": "ReserpSearchTool",

@@ -21,15 +21,14 @@ def test_public_export():
 def test_one_request_and_unchanged_payload(post):
     payload = {
         "ok": True,
-        "url": "https://www.google.com/search?q=test",
-        "finalUrl": "https://www.google.com/search?q=test",
-        "results": [{"url": "https://example.com"}],
+        "request": {"url": "https://www.google.com/search?q=test"},
+        "page": {"url": "https://www.google.com/search?q=test"},
+        "results": [{"url": "https://example.com", "text": "Example"}],
         "pagination": {
-            "start": 0,
-            "nextStart": 10,
-            "nextUrl": "https://www.google.com/search?q=test&start=10",
+            "next_url": "https://www.google.com/search?q=test&start=10",
         },
         "billed": True,
+        "billing_source": "request",
     }
     post.return_value.json.return_value = payload
 
@@ -39,7 +38,7 @@ def test_one_request_and_unchanged_payload(post):
 
     assert result == payload
     post.assert_called_once_with(
-        "https://api.reserp.ai/v1/serp",
+        "https://api.reserp.ai/v2/serp/search",
         headers={
             "Authorization": "Bearer test-key",
             "Content-Type": "application/json",

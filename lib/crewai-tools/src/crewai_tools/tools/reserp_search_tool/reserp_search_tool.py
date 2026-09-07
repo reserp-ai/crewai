@@ -10,7 +10,7 @@ from pydantic import BaseModel, Field
 import requests
 
 
-ENDPOINT = "https://api.reserp.ai/v1/serp"
+ENDPOINT = "https://api.reserp.ai/v2/serp/search"
 
 
 class ReserpSearchToolSchema(BaseModel):
@@ -26,12 +26,13 @@ class ReserpSearchToolSchema(BaseModel):
 
 
 class ReserpSearchTool(BaseTool):
-    """Expose one public Reserp request as a CrewAI tool call."""
+    """Expose one Reserp v2 Search request as a CrewAI tool call."""
 
     name: str = "Search Google with Reserp"
     description: str = (
-        "Send a complete Google Search URL to Reserp and return the public JSON "
-        "response unchanged. The caller controls retries and all orchestration."
+        "Send a complete Google Search URL to Reserp's v2 Search endpoint and "
+        "return the public JSON response unchanged. The caller controls retries "
+        "and all orchestration."
     )
     args_schema: type[BaseModel] = ReserpSearchToolSchema
     env_vars: list[EnvVar] = Field(
